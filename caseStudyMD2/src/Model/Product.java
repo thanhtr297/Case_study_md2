@@ -3,17 +3,15 @@ package Model;
 import java.io.Serializable;
 
 public class Product implements Serializable {
+    private static long serialUID = 12345678;
     private int id;
-    private static int ID = 0;
+    public static int ID = 0;
     private String name;
     private double price;
     private Category category;
     private int quantity;
     private String detail;
 
-    public Product() {
-
-    }
 
     public Product(String name, double price, Category category, int quantity, String detail) {
         this.id = ++ID;

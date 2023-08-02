@@ -3,8 +3,9 @@ package Model;
 import java.io.Serializable;
 
 public class Category implements Serializable {
+    private static long serialUID = 12345678;
     private int id;
-    private static int ID = 0;
+    public static int ID = 0;
     private String name;
 
     public Category() {

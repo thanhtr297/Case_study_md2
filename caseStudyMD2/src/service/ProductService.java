@@ -2,24 +2,12 @@ package service;
 
 import Model.Product;
 
-public interface ProductService<P> extends Service<Product>{
-    @Override
-    default void add() {
+public interface ProductService extends Service<Product>{
+    void deleteById();
 
-    }
+    void searchByName();
 
-    @Override
-    default void update() {
+    void searchByPrice();
 
-    }
-
-    @Override
-    default void delete() {
-
-    }
-
-    @Override
-    default Product findId() {
-        return null;
-    }
+//    void displayByCategory(Category category);
 }
