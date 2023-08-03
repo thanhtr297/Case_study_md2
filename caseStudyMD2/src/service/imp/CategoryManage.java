@@ -1,9 +1,7 @@
 package service.imp;
-
-import IO.IO;
+import io.IO;
 import Model.Category;
 import service.CategoryService;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,14 +13,7 @@ public class CategoryManage implements CategoryService, IO<Category> {
     private final List<Category> categoryList;
     private final Scanner scanner;
     private static CategoryManage categoryManage;
-    private final String PATH = "\\src\\IO\\Category";
-
-    public CategoryManage(List<Category> categoryList, Scanner scanner) {
-        this.categoryList = categoryList;
-        this.scanner = scanner;
-    }
-
-
+    private final String PATH = "C:\\Users\\bong\\Desktop\\MD2_btap\\CaseStudy\\caseStudyMD2\\src\\io\\Category";
 
 
     private CategoryManage(Scanner scanner) {
@@ -57,7 +48,7 @@ public class CategoryManage implements CategoryService, IO<Category> {
     }
 
     private Category getCategory() {
-        System.out.println("Input name: ");
+        System.out.println("Nhập tên danh mục: ");
         String name = scanner.nextLine();
         return new Category(name);
     }
@@ -66,29 +57,55 @@ public class CategoryManage implements CategoryService, IO<Category> {
     public void add() {
         categoryList.add(getCategory());
         write(categoryList, PATH);
+        System.out.println("Thêm thành công rồi nè!");
     }
 
     @Override
     public void update() {
-        Category category = findById();
-        if (category != null) {
-            System.out.println("Input new name: ");
-            String name = scanner.nextLine();
-            category.setName(name);
-        }else {
-            System.out.println("Not exist category have this id!");
-        }
-        write(categoryList, PATH);
+
     }
 
-    @Override
-    public void delete() {
 
+    public void updateCategory(ProductManage productManage) {
+        Category category = findById();
+        if (category != null) {
+            System.out.println("Nhập tên danh mục cần đổi: ");
+            String name = scanner.nextLine();
+            if (!name.isEmpty()) {
+                category.setName(name);
+                for (int i = 0; i < productManage.getListProduct().size() ; i++) {
+                    if (productManage.getListProduct().get(i).getCategory().getName().equals(category.getName())){
+                        productManage.getListProduct().get(i).getCategory().setName(name);
+                    }
+                }
+            }
+            System.out.println("Cập nhật thành công rồi nè");
+        }else {
+            System.out.println("Không có danh mục phù hợp với ID!");
+        }
+        write(categoryList, PATH);
+        productManage.write(productManage.getListProduct(), productManage.getPATH());
+    }
+
+    public void deleteCategory(ProductManage productManage){
+        Category category = findById();
+        if (category!=null){
+            for (int i = 0; i < productManage.getListProduct().size(); i++) {
+                if (productManage.getListProduct().get(i).getCategory().getName().equals(category.getName())){
+                    productManage.getListProduct().remove(i);
+                }
+            }
+            categoryList.remove(category);
+            write(categoryList, PATH);
+            productManage.write(productManage.getListProduct(),productManage.getPATH());
+        }else {
+            System.out.println("Không có danh mục phù hợp với ID!");
+        }
     }
 
     @Override
     public Category findById() {
-        System.out.println("Input id you want: ");
+        System.out.println("Nhập mã danh mục: ");
         int id = Integer.parseInt(scanner.nextLine());
         for (Category category : categoryList) {
             if(category.getId() == id) {
@@ -105,7 +122,7 @@ public class CategoryManage implements CategoryService, IO<Category> {
                 System.out.println(category);
             }
         } else {
-            System.out.println("Not exist category in list!");
+            System.out.println("Không có danh mục phù hợp trong danh sách!");
         }
     }
 

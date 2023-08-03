@@ -1,10 +1,9 @@
 package service.imp;
 
-import IO.IO;
+import io.IO;
 import Model.Category;
 import Model.Product;
 import service.ProductService;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,7 +15,7 @@ public class ProductManage implements ProductService, IO<Product> {
     private final List<Product> products;
     private final Scanner scanner;
     private final CategoryManage categoryManage;
-    private final String PATH = "\\src\\IO\\Product";
+    private final String PATH = "C:\\Users\\bong\\Desktop\\MD2_btap\\CaseStudy\\caseStudyMD2\\src\\io\\Product";
 
     public ProductManage(Scanner scanner, CategoryManage categoryManage) {
         products = read(PATH);
@@ -24,7 +23,12 @@ public class ProductManage implements ProductService, IO<Product> {
         this.categoryManage = categoryManage;
         setIndex();
     }
-
+    public List<Product> getListProduct(){
+        return products;
+    }
+    public String getPATH(){
+        return PATH;
+    }
     private void setIndex() {
         if (!products.isEmpty()) {
             int index = products.get(0).getId();
@@ -40,61 +44,77 @@ public class ProductManage implements ProductService, IO<Product> {
     }
 
     private Product getProduct() {
-        System.out.println("Input name");
+        System.out.println("Nhập tên sản phẩm");
         String name = scanner.nextLine();
-        System.out.println("Input price");
+        System.out.println("Nhập giá:");
         double price = Double.parseDouble(scanner.nextLine());
         categoryManage.display();
-        System.out.println("Input category: ");
+        System.out.println("Nhập danh mụcc cho sản phẩm: ");
         Category category = categoryManage.findById();
-        return new Product(name, price, category);
+        System.out.println("Nhập vào số lượng:");
+        int quantity = Integer.parseInt(scanner.nextLine());
+        System.out.println("Nhập vào mô tả:");
+        String detail = scanner.nextLine();
+        return new Product(name, price, category,quantity,detail);
     }
 
     @Override
     public void add() {
         products.add(getProduct());
         write(products, PATH);
+        System.out.println("Thêm thành công rồi nè");
     }
 
     @Override
     public void update() {
         Product product = findById();
         if (product != null) {
-            System.out.println("Input new name: ");
+            System.out.println("Cập nhật tên: ");
             String name = scanner.nextLine();
-            product.setName(name);
-            System.out.println("Input new price: ");
-            double price = Double.parseDouble(scanner.nextLine());
-            product.setPrice(price);
+            if (!name.isEmpty()){
+                product.setName(name);
+            }
+            System.out.println("Cập nhật giá: ");
+            String price = scanner.nextLine();
+            if (!price.isEmpty()){
+                product.setPrice(Double.parseDouble(price));
+            }
             categoryManage.display();
-            System.out.println("Input new category: ");
+            System.out.println("Cập nhật danh mục cho: " + name);
             Category category = categoryManage.findById();
-            product.setCategory(category);
+                product.setCategory(category);
+            System.out.println("Cập nhật số lượng: ");
+            String quantity = scanner.nextLine();
+            if (!quantity.isEmpty()) {
+                product.setQuantity(Integer.parseInt(quantity));
+            }
+            System.out.println("Cập nhật mô tả: ");
+            String detail = scanner.nextLine();
+            if (!detail.isEmpty()) {
+                product.setDetail(detail);            }
+
+            System.out.println("Cập nhật thành  công rồi nè!!");
+
         } else {
-            System.out.println("Not exist category have this id!");
+            System.out.println("Không có danh mục phù hợp!");
         }
         write(products, PATH);
     }
-
-    @Override
-    public void delete() {
-
-    }
-
     @Override
     public void deleteById() {
         Product product = findById();
         if (product != null) {
             products.remove(product);
+            System.out.println("Xóa thành công rồi nè");
         } else {
-            System.out.println("Not exist category have this id!");
+            System.out.println("Không có danh mục phù hợp!");
         }
         write(products, PATH);
     }
 
     @Override
     public Product findById() {
-        System.out.println("Input id you want: ");
+        System.out.println("Nhập vào mã sp: ");
         int id = Integer.parseInt(scanner.nextLine());
         for (Product product : products) {
             if (product.getId() == id) {
@@ -103,6 +123,33 @@ public class ProductManage implements ProductService, IO<Product> {
         }
         return null;
     }
+    public void displayByCategory(Category category){
+        boolean flag = false;
+        categoryManage.display();
+        System.out.println("Nhập vào mã danh mục cần hiển thị: ");
+        int checkID = Integer.parseInt(scanner.nextLine());
+        for (Product p : products) {
+            if (p.getCategory().getId() == checkID) {
+                System.out.println(p);
+                flag = true;
+            }
+        }
+        if (!flag) {
+            System.out.println("Không có danh mục mà bạn chọn!");
+        }
+     }
+     public  void sortByPrice(){
+
+     }
+     public void searchByName(){
+         System.out.println("Nhập từ khóa tên muốn tìm:");
+         String search = scanner.nextLine();
+         for (Product p: products) {
+             if (p.getName().toLowerCase().contains(search.toLowerCase())){
+                 System.out.println(p);
+             }
+         }
+     }
 
     @Override
     public void display() {
@@ -111,67 +158,9 @@ public class ProductManage implements ProductService, IO<Product> {
                 System.out.println(product);
             }
         } else {
-            System.out.println("Not exist product in list!");
+            System.out.println("Không có danh mục trong danh sách!");
         }
     }
-
-
-
-
-    @Override
-    public void searchByName() {
-        boolean check = false;
-        System.out.println("Input name you want search: ");
-        String search = scanner.nextLine();
-        for (Product product : products) {
-            if (product.getName().toLowerCase().contains(search.toLowerCase())) {
-                System.out.println(product);
-                check = true;
-            }
-        }
-        if (!check) {
-            System.out.println("Not exist product have name contains this word!");
-        }
-    }
-
-    @Override
-    public void searchByPrice() {
-        boolean check = false;
-        System.out.println("Input min price you want search: ");
-        double min = Double.parseDouble(scanner.nextLine());
-        System.out.println("Input max price you want search: ");
-        double max = Double.parseDouble(scanner.nextLine());
-        if (min > max) {
-            System.out.println("Please input again!");
-        } else {
-            for (Product product : products) {
-                if (product.getPrice() < max && product.getPrice() > min) {
-                    System.out.println(product);
-                    check = true;
-                }
-            }
-            if (!check) {
-                System.out.println("Not exist product have price between your input!");
-            }
-        }
-    }
-
-//    @Override
-//    public void displayByCategory(Category category) {
-//        boolean check = false;
-//        categoryManage.display();
-//        System.out.println("Input id category you want display: ");
-//        int categoryId = Integer.parseInt(scanner.nextLine());
-//        for (Product product : products) {
-//            if (product.getCategory().getId() == categoryId) {
-//                System.out.println(product);
-//                check = true;
-//            }
-//        }
-//        if (!check) {
-//            System.out.println("Not exist product of your category choice!");
-//        }
-//    }
 
     @Override
     public void write(List<Product> products, String path) {

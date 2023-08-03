@@ -1,4 +1,43 @@
 package controller;
 
+import Model.Category;
+
+import service.imp.ProductManage;
+
+import java.util.Scanner;
+
 public class MenuProduct {
+    public void menuProduct(ProductManage productManage){
+        Scanner scanner = new Scanner(System.in);
+                int choice;
+        do {
+            System.out.println("Menu sản phẩm \n" +
+                    "1. Thêm sản phẩm. \n" +
+                    "2. Sửa sản phẩm. \n" +
+                    "3. Hiển thị sản phẩm. \n" +
+                    "4. Xóa sản phẩm. \n" +
+                    "0. Thoát. \n" +
+                    "Nhập lựa chọn của bạn:");
+            choice = Integer.parseInt(scanner.nextLine());
+            switch (choice){
+                case 1:
+                    productManage.add();
+                    break;
+                case 2:
+                    productManage.update();
+                    break;
+                case 3:
+                    productManage.display();
+                    break;
+                case 4:
+                    productManage.deleteById();
+                    break;
+                case 5:
+                    productManage.displayByCategory(new Category());
+                    break;
+                case 6:
+                    productManage.searchByName();
+            }
+        } while (choice != 0);
+    }
 }

@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private static long serialUID = 12345678;
+    private static final long serialUID = 12345678L;
     private int id;
     public static int ID = 0;
     private String name;
@@ -77,5 +77,16 @@ public class Product implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "Sản phẩm: " + "\n" + name +
+                "Mã sản phẩm: " + id + "\n" +
+                "Giá: " + price +"VNĐ" + "\n" +
+                category +"\n" +
+                "Số lượng: " + quantity +"chiếc" +"\n" +
+                "Mô tả: " + detail + "\n" +
+                "-------------------------------------------";
     }
 }

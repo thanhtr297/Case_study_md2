@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 
 public class Category implements Serializable {
-    private static long serialUID = 12345678;
+    private static final long serialUID = 12345678;
     private int id;
     public static int ID = 0;
     private String name;
@@ -40,9 +40,8 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Danh mục: " + "  " +
+                  id + "  " +
+                "tên: " + name + ".";
     }
 }

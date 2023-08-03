@@ -1,13 +1,9 @@
 package service;
 
 import Model.Product;
-
+import Model.Category;
 public interface ProductService extends Service<Product>{
     void deleteById();
 
-    void searchByName();
-
-    void searchByPrice();
-
-//    void displayByCategory(Category category);
+    void displayByCategory(Category category);
 }
