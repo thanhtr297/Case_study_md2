@@ -53,9 +53,9 @@ public class ProductManage implements ProductService, IO<Product> {
         Category category = categoryManage.findById();
         System.out.println("Nhập vào số lượng:");
         int quantity = Integer.parseInt(scanner.nextLine());
-        System.out.println("Nhập vào mô tả:");
-        String detail = scanner.nextLine();
-        return new Product(name, price, category,quantity,detail);
+        System.out.println("Nhập vào trạng thái máy:");
+        String status = scanner.nextLine();
+        return new Product(name, price, category,quantity,status);
     }
 
     @Override
@@ -88,11 +88,11 @@ public class ProductManage implements ProductService, IO<Product> {
             if (!quantity.isEmpty()) {
                 product.setQuantity(Integer.parseInt(quantity));
             }
-            System.out.println("Cập nhật mô tả: ");
+            System.out.println("Cập nhật trạng thái: ");
             String detail = scanner.nextLine();
             if (!detail.isEmpty()) {
-                product.setDetail(detail);            }
-
+                product.setStatus(detail);
+            }
             System.out.println("Cập nhật thành  công rồi nè!!");
 
         } else {
@@ -146,15 +146,18 @@ public class ProductManage implements ProductService, IO<Product> {
          String search = scanner.nextLine();
          for (Product p: products) {
              if (p.getName().toLowerCase().contains(search.toLowerCase())){
+                 System.out.println("\t\t\t Các sản phẩm có tên theo từ khóa "+"'"+search+"'"+" là:");
                  System.out.println(p);
              }
          }
      }
 
+
     @Override
     public void display() {
         if (!products.isEmpty()) {
             for (Product product : products) {
+                System.out.println("Danh sách sản phẩm hiện có: ");
                 System.out.println(product);
             }
         } else {

@@ -118,8 +118,10 @@ public class CategoryManage implements CategoryService, IO<Category> {
     @Override
     public void display() {
         if (!categoryList.isEmpty()) {
+            System.out.println("Danh sách danh mục: ");
             for (Category category : categoryList) {
                 System.out.println(category);
+                System.out.println("----------");
             }
         } else {
             System.out.println("Không có danh mục phù hợp trong danh sách!");

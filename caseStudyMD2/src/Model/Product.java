@@ -3,32 +3,32 @@ package Model;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private static final long serialUID = 12345678L;
+    private static final long serialVersionUID = 12345265656565678L;
     private int id;
     public static int ID = 0;
     private String name;
     private double price;
     private Category category;
     private int quantity;
-    private String detail;
+    private String status;
 
 
-    public Product(String name, double price, Category category, int quantity, String detail) {
+    public Product(String name, double price, Category category, int quantity, String status) {
         this.id = ++ID;
         this.name = name;
         this.price = price;
         this.category = category;
         this.quantity = quantity;
-        this.detail = detail;
+        this.status = status;
     }
 
-    public Product(int id, String name, double price, Category category, int quantity, String detail) {
+    public Product(int id, String name, double price, Category category, int quantity, String status) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.quantity = quantity;
-        this.detail = detail;
+        this.status = status;
     }
 
     public int getId() {
@@ -71,22 +71,22 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Sản phẩm: " + "\n" + name +
+        return "Sản phẩm: " + "  " + name + "\n" +
                 "Mã sản phẩm: " + id + "\n" +
-                "Giá: " + price +"VNĐ" + "\n" +
+                "Giá: " + price +" Nghìn VNĐ" + "\n" +
                 category +"\n" +
                 "Số lượng: " + quantity +"chiếc" +"\n" +
-                "Mô tả: " + detail + "\n" +
+                "Trạng thái: " + status + "\n" +
                 "-------------------------------------------";
     }
 }

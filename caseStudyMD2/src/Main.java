@@ -12,14 +12,15 @@ public class Main {
         MenuProduct menuProduct = new MenuProduct();
         CategoryManage categoryManage = CategoryManage.getInstance(scanner);
         ProductManage productManage = new ProductManage(scanner,categoryManage);
-        MenuTool menuTool = new MenuTool();
+        MenuTool menuTool = new MenuTool(productManage);
         int choice = 0;
         do {
-            System.out.println("Ứng dụng quản lý sản phẩm Thành điện máy \n" +
-                    "1. Menu Danh mục\n" +
-                    "2. Menu Sản phẩm \n" +
-                    "3. Menu chức năng \n" +
-                    "0. Thoát. \n" +
+            System.out.println(" \t\t\t\t\t CHÀO MỪNG BẠN ĐẾN VỚI \n" +
+                    "\t\t\t Ứng dụng quản lý sản phẩm Thành điện máy \n" +
+                    "\t\t\t1. Menu Danh mục\n" +
+                    "\t\t\t2. Menu Sản phẩm \n" +
+                    "\t\t\t3. Menu chức năng \n" +
+                    "\t\t\t0. Thoát. \n" +
                     "Nhập lựa chọn của bạn: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
