@@ -142,13 +142,18 @@ public class ProductManage implements ProductService, IO<Product> {
 
      }
      public void searchByName(){
+        boolean flag = false;
          System.out.println("Nhập từ khóa tên muốn tìm:");
          String search = scanner.nextLine();
          for (Product p: products) {
              if (p.getName().toLowerCase().contains(search.toLowerCase())){
+                 flag = true;
                  System.out.println("\t\t\t Các sản phẩm có tên theo từ khóa "+"'"+search+"'"+" là:");
                  System.out.println(p);
              }
+         }
+         if (!flag){
+             System.out.println("Không có kết quả cho từ khóa "+ search);
          }
      }
 

@@ -85,7 +85,7 @@ public class Product implements Serializable {
                 "Mã sản phẩm: " + id + "\n" +
                 "Giá: " + price +" Nghìn VNĐ" + "\n" +
                 category +"\n" +
-                "Số lượng: " + quantity +"chiếc" +"\n" +
+                "Số lượng: " + quantity +" chiếc" +"\n" +
                 "Trạng thái: " + status + "\n" +
                 "-------------------------------------------";
     }

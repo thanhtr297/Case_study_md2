@@ -1,6 +1,8 @@
+import controller.MenuAdmin;
 import controller.MenuCategory;
 import controller.MenuProduct;
 import controller.MenuTool;
+import service.imp.AccountManage;
 import service.imp.CategoryManage;
 import service.imp.ProductManage;
 import java.util.Scanner;
@@ -8,18 +10,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        MenuCategory menuCategory = new MenuCategory();
-        MenuProduct menuProduct = new MenuProduct();
+        AccountManage accountManage = new AccountManage();
         CategoryManage categoryManage = CategoryManage.getInstance(scanner);
         ProductManage productManage = new ProductManage(scanner,categoryManage);
+        MenuCategory menuCategory = new MenuCategory();
+        MenuProduct menuProduct = new MenuProduct();
         MenuTool menuTool = new MenuTool(productManage);
+        MenuAdmin menuAdmin;
+        menuAdmin = new MenuAdmin(productManage,menuProduct,menuTool,menuCategory);
         int choice = 0;
         do {
-            System.out.println(" \t\t\t\t\t CHÀO MỪNG BẠN ĐẾN VỚI \n" +
+            System.out.println(" \t\t----------------------- \n" +
                     "\t\t\t Ứng dụng quản lý sản phẩm Thành điện máy \n" +
-                    "\t\t\t1. Menu Danh mục\n" +
-                    "\t\t\t2. Menu Sản phẩm \n" +
-                    "\t\t\t3. Menu chức năng \n" +
+                    "\t\t\t1. Đăng nhập quản trị viên\n" +
+                    "\t\t\t2. Xem mà không cần đăng nhập \n" +
                     "\t\t\t0. Thoát. \n" +
                     "Nhập lựa chọn của bạn: ");
             try {
@@ -32,13 +36,27 @@ public class Main {
             } else {
                 switch (choice) {
                     case 1:
-                        menuCategory.menuCategory(productManage);
+                        int count = 0;
+                        do {
+                            if (accountManage.Login()){
+                                menuAdmin.menuAdmin();
+                            } else {
+                                count+=1;
+                                if (count <3){
+                                    System.out.println("Tên đăng nhập hoặc mật khẩu không chính xác! \n " +
+                                            "Bạn đã nhập không chính xác " + count +" lần.\n" +
+                                            "Bạn còn " + (3-count) + " lần nhập!");
+
+                                } else  {
+                                    System.out.println("Bạn đã nhập đủ 3 lần!");
+                                }
+
+                            }
+                        } while (count < 3);
+
                         break;
                     case 2:
-                        menuProduct.menuProduct(productManage);
-                        break;
-                    case 3:
-                        menuTool.menuTool(productManage);
+                        menuTool.menuNotLogin();
                         break;
                     case 0:
                         System.exit(0);

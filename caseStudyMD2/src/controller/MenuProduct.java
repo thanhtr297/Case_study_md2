@@ -1,7 +1,4 @@
 package controller;
-
-import Model.Category;
-
 import service.imp.ProductManage;
 
 import java.util.Scanner;
@@ -32,11 +29,6 @@ public class MenuProduct {
                 case 4:
                     productManage.deleteById();
                     break;
-                case 5:
-                    productManage.displayByCategory(new Category());
-                    break;
-                case 6:
-                    productManage.searchByName();
             }
         } while (choice != 0);
     }
