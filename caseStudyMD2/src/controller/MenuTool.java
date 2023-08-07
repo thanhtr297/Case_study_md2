@@ -15,7 +15,6 @@ public class MenuTool {
     }
 
     public void menuNotLogin(){
-        int choice;
         do {
             System.out.println("\t\t\t\tMenu không đăng nhập \n" +
                     "\t\t\t1. Hiện thị các sa phẩm hiện có\n" +
@@ -24,7 +23,11 @@ public class MenuTool {
                     "\t\t\t4. Hiển thị sản phẩm theo trạng thái. \n" +
                     "\t\t\t0. Thoát. \n" +
                     "Nhập lựa chọn của bạn: ");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (Exception o) {
+                System.out.println("Vui lòng nhập đúng số!");
+            }
             switch (choice) {
                 case 1:
                     productManage.display();
@@ -39,10 +42,8 @@ public class MenuTool {
                 case 4:
                     displayByStatus();
                     break;
-                case 5:
-                    break;
-                case 6:
             }
+
         } while (choice != 0);
 
     }
