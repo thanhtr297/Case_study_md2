@@ -22,7 +22,7 @@ public class Main {
         int choice = -1;
         do {
             System.out.println(" \t\t----------------------- \n" +
-                    "\t\t\t Ứng dụng quản lý sản phẩm Thành điện máy \n" +
+                    "\t\t\t Ứng dụng quản lý sản phẩm điện máy \n" +
                     "\t\t\t1. Đăng nhập quản trị viên\n" +
                     "\t\t\t2. Xem mà không cần đăng nhập \n" +
                     "\t\t\t0. Thoát. \n" +
@@ -43,12 +43,12 @@ public class Main {
                                 } else {
                                     count += 1;
                                     if (count < 3) {
-                                        System.out.println("Tên đăng nhập hoặc mật khẩu không chính xác! \n " +
+                                        System.err.println("Tên đăng nhập hoặc mật khẩu không chính xác! \n " +
                                                 "Bạn đã nhập không chính xác " + count + " lần.\n" +
                                                 "Bạn còn " + (3 - count) + " lần nhập!");
 
                                     } else {
-                                        System.out.println("Bạn đã nhập đủ 3 lần!");
+                                        System.err.println("Bạn đã nhập đủ 3 lần!");
                                     }
 
                                 }
@@ -62,7 +62,7 @@ public class Main {
                     }
                 }
             } catch (Exception o) {
-                System.out.println("Vui lòng nhập đúng số!");
+                System.err.println("Vui lòng nhập đúng số!");
             }
         } while (choice != 0);
     }

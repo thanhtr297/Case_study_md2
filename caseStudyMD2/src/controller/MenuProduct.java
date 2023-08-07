@@ -19,7 +19,7 @@ public class MenuProduct {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (Exception o){
-                System.out.println("Vui lòng nhập đúng số!");
+                System.err.println("Vui lòng nhập đúng số!");
             }
             switch (choice){
                 case 1:

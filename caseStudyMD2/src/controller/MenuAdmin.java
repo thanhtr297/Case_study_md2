@@ -20,14 +20,14 @@ public class MenuAdmin {
     }
 
     Scanner scanner = new Scanner(System.in);
-    int choice;
+    int choice=-1;
 
     public void menuAdmin() {
-        boolean flag;
+
         do {
-            System.out.println("\t\t\t-------------" +
-                    " \t\t\t\t\t CHÀO MỪNG BẠN ĐẾN VỚI \n" +
-                    "\t\t\t Ứng dụng quản lý sản phẩm điện máy \n" +
+            System.out.println("\t\t\t-------------\n" +
+                    " \t\t\t\t\t CHÀO MỪNG BẠN ĐẾN VỚI" +
+                    " ỨNG DỤNG QUẢN LÝ ĐIỆN MÁY \n" +
                     "\t\t\t1. Menu Danh mục\n" +
                     "\t\t\t2. Menu Sản phẩm \n" +
                     "\t\t\t3. Menu chức năng \n" +
@@ -35,14 +35,6 @@ public class MenuAdmin {
                     "Nhập lựa chọn của bạn: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
-                flag = true;
-            } catch (Exception o) {
-                System.out.println("Vui lòng nhập đúng số!");
-                flag = false;
-            }
-            if (choice < 0 || choice > 3) {
-                System.out.println("Vui lòng nhập đúng số!");
-            } else {
                 switch (choice) {
                     case 1:
                         menuCategory.menuCategory(productManage);
@@ -54,9 +46,10 @@ public class MenuAdmin {
                         menuTool.menuTool(productManage);
                         break;
                 }
+            } catch (Exception o) {
+                System.err.println("Vui lòng nhập đúng số!");
             }
-        }
-        while (choice != 0 || !flag);
+        } while (choice != 0);
     }
 
 }

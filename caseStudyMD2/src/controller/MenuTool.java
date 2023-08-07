@@ -26,7 +26,7 @@ public class MenuTool {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (Exception o) {
-                System.out.println("Vui lòng nhập đúng số!");
+                System.err.println("Vui lòng nhập đúng số!");
             }
             switch (choice) {
                 case 1:
@@ -61,7 +61,7 @@ public class MenuTool {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (Exception o){
-                System.out.println("Vui lòng nhập đúng số!");
+                System.err.println("Vui lòng nhập đúng số!");
             }
             switch (choice) {
                 case 1:
@@ -107,7 +107,7 @@ public class MenuTool {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (Exception o){
-                System.out.println("Vui lòng nhập đúng số!");
+                System.err.println("Vui lòng nhập đúng số!");
             }
             switch (choice){
                 case 1:
@@ -130,9 +130,8 @@ public class MenuTool {
                     break;
             }
             if (!flag){
-                System.out.println("Vui lòng nhập lại!");
+                System.err.println("Vui lòng nhập lại!");
             }
         } while (choice != 0);
     }
-
 }
