@@ -10,8 +10,9 @@ public class MenuAdmin {
     private final MenuProduct menuProduct;
     private final MenuTool menuTool;
     private final MenuCategory menuCategory;
+
     public MenuAdmin(ProductManage productManage, MenuProduct menuProduct
-    ,MenuTool menuTool, MenuCategory menuCategory) {
+            , MenuTool menuTool, MenuCategory menuCategory) {
         this.menuCategory = menuCategory;
         this.productManage = productManage;
         this.menuProduct = menuProduct;
@@ -22,6 +23,7 @@ public class MenuAdmin {
     int choice;
 
     public void menuAdmin() {
+        boolean flag;
         do {
             System.out.println("\t\t\t-------------" +
                     " \t\t\t\t\t CHÀO MỪNG BẠN ĐẾN VỚI \n" +
@@ -33,8 +35,10 @@ public class MenuAdmin {
                     "Nhập lựa chọn của bạn: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
+                flag = true;
             } catch (Exception o) {
                 System.out.println("Vui lòng nhập đúng số!");
+                flag = false;
             }
             if (choice < 0 || choice > 3) {
                 System.out.println("Vui lòng nhập đúng số!");
@@ -52,7 +56,7 @@ public class MenuAdmin {
                 }
             }
         }
-        while (choice != 0);
+        while (choice != 0 || !flag);
     }
 
 }

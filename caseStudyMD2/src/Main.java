@@ -19,6 +19,7 @@ public class Main {
         MenuAdmin menuAdmin;
         menuAdmin = new MenuAdmin(productManage,menuProduct,menuTool,menuCategory);
         int choice = 0;
+        boolean flag;
         do {
             System.out.println(" \t\t----------------------- \n" +
                     "\t\t\t Ứng dụng quản lý sản phẩm Thành điện máy \n" +
@@ -40,6 +41,7 @@ public class Main {
                         do {
                             if (accountManage.Login()){
                                 menuAdmin.menuAdmin();
+                                break;
                             } else {
                                 count+=1;
                                 if (count <3){

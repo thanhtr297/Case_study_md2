@@ -7,6 +7,7 @@ import service.imp.ProductManage;
 import java.util.Scanner;
 
 public class MenuTool {
+    int choice;
     public ProductManage productManage;
     Scanner scanner = new Scanner(System.in);
     public MenuTool(ProductManage productManage) {
@@ -46,10 +47,9 @@ public class MenuTool {
 
     }
     public void menuTool(ProductManage productManage) {
-        int choice;
+
         do {
             System.out.println("\t\t\t\tMenu chức năng \n" +
-                    "\t\t\t1. Hiện thị các sa phẩm hiện có\" +" +
                     "\t\t\t1. Hiển thị sản phẩm theo danh mục. \n" +
                     "\t\t\t2. Tìm kiếm theo tên sản phẩm. \n" +
                     "\t\t\t3. Hiển thị sản phẩm theo trạng thái. \n" +
@@ -57,7 +57,11 @@ public class MenuTool {
                     "\t\t\t5. Hiển thị tồng tiền hàng đang tổn kho. \n" +
                     "\t\t\t0. Thoát. \n" +
                     "Nhập lựa chọn của bạn: ");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (Exception o){
+                System.out.println("Vui lòng nhập đúng số!");
+            }
             switch (choice) {
                 case 1:
                     productManage.displayByCategory(new Category());
@@ -74,7 +78,6 @@ public class MenuTool {
                 case 5:
                     displayTotalCashInStock();
                     break;
-                case 6:
             }
         } while (choice != 0);
     }
@@ -94,16 +97,18 @@ public class MenuTool {
     }
     public void displayByStatus(){
         boolean flag = false;
-        int pick ;
         do {
             System.out.println("\t\t\t\tMenu hiển thị: \n" +
                     "\t\t\t1. Hiển thị ra sản phẩm trạng thái mới\n" +
                     "\t\t\t2. Hiển thị ra sản phẩm trạng thái cũ \n" +
                     "\t\t\t0. Thoát. \n" +
                     "Nhập vào lựa chọn hiển thị: ");
-
-            pick = Integer.parseInt(scanner.nextLine());
-            switch (pick){
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (Exception o){
+                System.out.println("Vui lòng nhập đúng số!");
+            }
+            switch (choice){
                 case 1:
                     for (Product p : productManage.getListProduct()) {
                         if (p.getStatus().equalsIgnoreCase("mới")){
@@ -126,7 +131,7 @@ public class MenuTool {
             if (!flag){
                 System.out.println("Vui lòng nhập lại!");
             }
-        } while (pick != 0);
+        } while (choice != 0);
     }
 
 }
